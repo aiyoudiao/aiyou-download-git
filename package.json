@@ -1,0 +1,179 @@
+{
+  "name": "aiyou-download-git",
+  "version": "1.0.0",
+  "description": "aiyou-ui的命令行工具",
+  "main": "./index.js",
+  "bin": {
+    "aiyou-dg": "./bin/index.js"
+  },
+  "scripts": {
+    "debugger": "node --inspect-brk ./node_modules/webpack/bin/webpack.js --config webpack.config.babel.js --progress --display-error-details --profile",
+    "lint": "eslint --ext .js ./",
+    "lint-fix": "eslint --fix --ext .js ./",
+    "version": "npm run log&&git add CHANGELOG.md",
+    "log": "conventional-changelog --config ./node_modules/vue-cli-plugin-commitlint/lib/log -i CHANGELOG.md -s -r 0",
+    "cz": "git add . && git cz && npm run log",
+    "push": "git push origin master:master",
+    "test": "jest --cache",
+    "test-all": "jest --watchAll",
+    "test2": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
+    "test:prod": "npm run lint && npm run test -- --no-cache"
+  },
+  "pre-commit": [
+    "lint",
+    "lint-fix"
+  ],
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/vue-cli-plugin-commitlint/lib/cz"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx|js)": "typescript-babel-jest"
+    },
+    "testEnvironment": "jsdom",
+    "testRegex-backup": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testRegex": "\\.(spec)\\.(js|ts)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/boot.ts"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverageFrom": [
+      "src/*.{js,ts}",
+      "src/**/*.{js,ts}"
+    ],
+    "verbose": true,
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "globals": {
+      "NODE_ENV": "test"
+    }
+  },
+  "keywords": [
+    "aiyou"
+  ],
+  "prettier": {
+    "semi": true,
+    "singleQuote": true
+  },
+  "author": "哎哟迪奥",
+  "license": "Mozilla Public License Version 2.0",
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@types/jest": "^24.0.23",
+    "autoprefixer": "^9.4.2",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "child-process-promise": "^2.2.1",
+    "colors": "^1.4.0",
+    "commitizen": "^4.0.3",
+    "commitlint": "^8.2.0",
+    "conventional-changelog-cli": "^2.0.28",
+    "copy-webpack-plugin": "^4.3.1",
+    "coveralls": "^3.0.6",
+    "cross-env": "^6.0.3",
+    "cz-conventional-changelog": "^3.0.2",
+    "eslint": "^6.7.2",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "glob-all": "^3.1.0",
+    "husky": "^3.0.9",
+    "imports-loader": "^0.8.0",
+    "jest": "^24.9.0",
+    "jest-config": "^24.9.0",
+    "lint-staged": "^9.4.1",
+    "nprogress": "^0.2.0",
+    "postcss": "^7.0.6",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-sprites": "^4.2.1",
+    "pre-commit": "^1.2.2",
+    "prompt": "^1.0.0",
+    "regenerator-runtime": "^0.13.3",
+    "semantic-release": "^15.13.24",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.1.0",
+    "ts-loader": "^6.2.0",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^9.0.0",
+    "tslint-loader": "^3.5.4",
+    "typescript": "^3.7.3",
+    "typescript-babel-jest": "^1.0.6",
+    "url-loader": "^1.1.2",
+    "vue-cli-plugin-commitlint": "^1.0.10"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "child_process": "^1.0.2",
+    "cli-spinners": "^2.2.0",
+    "commander": "^4.1.0",
+    "exec": "^0.2.1",
+    "figlet": "^1.2.4",
+    "inquirer": "^7.0.4",
+    "javascriptplus": "^1.2.0",
+    "ora": "^4.0.3",
+    "yargs": "^15.1.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "core-decorators": "^0.20.0",
+    "core-js": "^3.1.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilovejwl/aiyou-download-git.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ilovejwl/aiyou-download-git/issues"
+  },
+  "homepage": "https://github.com/ilovejwl/aiyou-download-git#readme"
+}
