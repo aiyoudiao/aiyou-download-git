@@ -80,7 +80,9 @@
     }
   },
   "keywords": [
-    "aiyou","download","git"
+    "aiyou",
+    "download",
+    "git"
   ],
   "prettier": {
     "semi": true,
@@ -106,7 +108,7 @@
     "commitizen": "^4.0.3",
     "commitlint": "^8.2.0",
     "conventional-changelog-cli": "^2.0.28",
-    "copy-webpack-plugin": "^4.3.1",
+    "copy-webpack-plugin": "^5.1.1",
     "coveralls": "^3.0.6",
     "cross-env": "^6.0.3",
     "cz-conventional-changelog": "^3.0.2",
