@@ -1,7 +1,7 @@
 {
-  "name": "aiyou-download-git",
+  "name": "aiyou-dg",
   "version": "1.0.0",
-  "description": "aiyou-ui的命令行工具",
+  "description": " aiyou-dg（aiyou-download-git）是**哎呦系列**中，用于拉取远程或本地的Repository代码并且支持下载Repository的压缩包的工具包。",
   "main": "./index.js",
   "bin": {
     "aiyou-dg": "./bin/index.js"
@@ -10,9 +10,8 @@
     "debugger": "node --inspect-brk ./node_modules/webpack/bin/webpack.js --config webpack.config.babel.js --progress --display-error-details --profile",
     "lint": "eslint --ext .js ./",
     "lint-fix": "eslint --fix --ext .js ./",
-    "version": "npm run log&&git add CHANGELOG.md",
     "log": "conventional-changelog --config ./node_modules/vue-cli-plugin-commitlint/lib/log -i CHANGELOG.md -s -r 0",
-    "cz": "git add . && git cz && npm run log",
+    "cz": "git add . && git cz",
     "push": "git push origin master:master",
     "test": "jest --cache",
     "test-all": "jest --watchAll",
@@ -81,14 +80,14 @@
     }
   },
   "keywords": [
-    "aiyou"
+    "aiyou","download","git"
   ],
   "prettier": {
     "semi": true,
     "singleQuote": true
   },
   "author": "哎哟迪奥",
-  "license": "Mozilla Public License Version 2.0",
+  "license": "MPL-2",
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
@@ -157,6 +156,7 @@
     "child_process": "^1.0.2",
     "cli-spinners": "^2.2.0",
     "commander": "^4.1.0",
+    "download-git-repo": "^3.0.2",
     "exec": "^0.2.1",
     "figlet": "^1.2.4",
     "inquirer": "^7.0.4",
@@ -170,7 +170,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ilovejwl/aiyou-download-git.git"
+    "url": "https://github.com/ilovejwl/aiyou-download-git.git"
   },
   "bugs": {
     "url": "https://github.com/ilovejwl/aiyou-download-git/issues"

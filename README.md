@@ -69,7 +69,7 @@ aiyou-download-git程序，可以同时运行在windows和类unux的电脑中：
 局部使用（作为第三方依赖包来使用），在node环境下的js文件中复制以下代码进行粘贴：
 
 ```javascript
-const AiYouDownloadGit = require ('aiyou-download-git');
+const AiYouDownloadGit = require ('aiyou-dg');
 const aiyouDG = new AiYouDownloadGit ();
 
 aiyouDG.get ({
