@@ -1,5 +1,5 @@
 {
-  "name": "aiyou-dg",
+  "name": "aiyou-download-git",
   "version": "1.0.0",
   "description": " aiyou-dg（aiyou-download-git）是**哎呦系列**中，用于拉取远程或本地的Repository代码并且支持下载Repository的压缩包的工具包。",
   "main": "./index.js",
