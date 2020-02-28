@@ -2,11 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.1.3](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.2...v1.1.3) (2020-02-28)
+### [1.1.4](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.3...v1.1.4) (2020-02-28)
 
-### [1.1.2](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.1...v1.1.2) (2020-02-28)
+## [1.1.3](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.2...v1.1.3) (2020-02-28)
 
-### [1.1.1](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.0...v1.1.1) (2020-02-28)
+### chore
+范围|描述|commitId
+--|--|--
+ release | 1.1.3 | [f639c5a](https://github.com/aiyoudiao/aiyou-download-git/commit/f639c5a)
+
+## [1.1.2](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.1...v1.1.2) (2020-02-28)
+
+### chore
+范围|描述|commitId
+--|--|--
+ release | 1.1.2 | [db17960](https://github.com/aiyoudiao/aiyou-download-git/commit/db17960)
+
+## [1.1.1](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.0...v1.1.1) (2020-02-28)
+
+### 📝 文档
+范围|描述|commitId
+--|--|--
+ readme.md | 修改了一下readme.md和package.json中的内容 | [9923897](https://github.com/aiyoudiao/aiyou-download-git/commit/9923897)
+
+
+### chore
+范围|描述|commitId
+--|--|--
+ release | 1.1.1 | [545ced8](https://github.com/aiyoudiao/aiyou-download-git/commit/545ced8)
 
 # [1.1.0](https://github.com/aiyoudiao/aiyou-download-git/compare/a341b81...v1.1.0) (2020-02-28)
 
