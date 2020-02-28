@@ -1,3 +1,9 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.1.1](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.0...v1.1.1) (2020-02-28)
+
 # [1.1.0](https://github.com/aiyoudiao/aiyou-download-git/compare/a341b81...v1.1.0) (2020-02-28)
 
 范围|描述|commitId
@@ -29,4 +35,3 @@
 范围|描述|commitId
 --|--|--
  release | 1.1.0 | [e789d9e](https://github.com/aiyoudiao/aiyou-download-git/commit/e789d9e)
-
