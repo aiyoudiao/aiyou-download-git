@@ -22,7 +22,8 @@
     "release": "standard-version",
     "push-tag": "git push --follow-tags origin master",
     "czpush": "npm run cz && npm run push",
-    "tagpush": "npm run release && npm run push-tag"
+    "tagpush": "npm run release && npm run push-tag",
+    "tonpm": "nrm use npm && npm login && npm publish"
   },
   "pre-commit": [
     "lint",
@@ -164,10 +165,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ilovejwl/aiyou-download-git.git"
+    "url": "https://github.com/aiyoudiao/aiyou-download-git.git"
   },
   "bugs": {
-    "url": "https://github.com/ilovejwl/aiyou-download-git/issues"
+    "url": "https://github.com/aiyoudiao/aiyou-download-git/issues"
   },
-  "homepage": "https://github.com/ilovejwl/aiyou-download-git#readme"
+  "homepage": "https://github.com/aiyoudiao/aiyou-download-git#readme"
 }

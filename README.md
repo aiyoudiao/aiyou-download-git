@@ -82,7 +82,7 @@ const aiyouDG = new AiYouDownloadGit ();
 
 aiyouDG.get ({
     /* github上 该仓库的所有者/该仓库名称 */
-    currentUrl: 'ilovejwl/aiyou-download-git',
+    currentUrl: 'aiyoudiao/aiyou-download-git',
     /* 指定存放目录，可相对路径也可绝对路径 */
     targetPath: './temp/aiyou-download-git',
     /* 其它相关选项，一般可不动它*/
@@ -119,7 +119,7 @@ aiyou-download-git 是最简单，易用的获得 Repository 仓库代码的工�
 
 ## 代码仓库
 
-[github 链接](https://github.com/ilovejwl/aiyou-download-git)
+[github 链接](https://github.com/aiyoudiao/aiyou-download-git)
 
 ## 📞 社区交流
 
