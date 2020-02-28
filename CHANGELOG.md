@@ -1,10 +1,17 @@
-# Changelog
+## [1.1.5](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.4...v1.1.5) (2020-02-28)
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+### chore
+范围|描述|commitId
+--|--|--
+ release | 1.1.4 | [709f016](https://github.com/aiyoudiao/aiyou-download-git/commit/709f016)
+ release | 1.1.5 | [452378b](https://github.com/aiyoudiao/aiyou-download-git/commit/452378b)
 
-### [1.1.5](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.4...v1.1.5) (2020-02-28)
+## [1.1.4](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.3...v1.1.4) (2020-02-28)
 
-### [1.1.4](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.3...v1.1.4) (2020-02-28)
+### chore
+范围|描述|commitId
+--|--|--
+ release | 1.1.4 | [1d90ed1](https://github.com/aiyoudiao/aiyou-download-git/commit/1d90ed1)
 
 ## [1.1.3](https://github.com/aiyoudiao/aiyou-download-git/compare/v1.1.2...v1.1.3) (2020-02-28)
 
@@ -64,3 +71,4 @@ All notable changes to this project will be documented in this file. See [standa
 范围|描述|commitId
 --|--|--
  release | 1.1.0 | [e789d9e](https://github.com/aiyoudiao/aiyou-download-git/commit/e789d9e)
+
