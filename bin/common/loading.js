@@ -3,14 +3,15 @@
  * @version: 1.0.0
  * @Author: ilovejwl
  * @Date: 2020-02-02 08:10:26
- * @LastEditTime : 2020-02-04 11:02:46
- * @LastEditors  : ilovejwl
+ * @LastEditTime: 2020-02-27 18:26:26
+ * @LastEditors: ilovejwl
  */
 // const cliSpinners = require ('cli-spinners');
 const cliSpinners = getSpinners ();
 const ora = require ('ora');
 const chalk = require ('chalk');
-const out = require ('./output').out;
+const outObj = require ('./output');
+const { outError, outSuccess } = outObj;
 
 function init (hooks, text) {
   const list = [];
@@ -45,17 +46,17 @@ function init (hooks, text) {
     if (returnValue === 'yes') {
       mainter.text = `${chalk.red (text)} ${chalk.green ('Generation completed!')}`;
       mainter.succeed ();
-      out (text);
+      outSuccess ();
       clearInterval (timer);
     }
 
     if (returnValue === 'bad') {
       mainter.text = `${chalk.green (text)} ${chalk.red ('Generation not completed!')}`;
       mainter.fail ();
-      // out (text);
+      outError ();
       clearInterval (timer);
     }
-  }, 1000);
+  }, 2000);
 }
 
 function getSpinners () {

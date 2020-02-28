@@ -5,17 +5,22 @@
  * @version: 1.0.0
  * @Author: ilovejwl
  * @Date: 2020-02-03 17:03:36
- * @LastEditTime : 2020-02-04 11:05:09
- * @LastEditors  : ilovejwl
+ * @LastEditTime: 2020-02-28 22:54:56
+ * @LastEditors: ilovejwl
  */
 const Commander = require ('commander');
 const program = new Commander.Command ();
 const chalk = require ('chalk');
+const inquirer = require ('inquirer');
 const version = require ('../package').version;
 const AiYouDownloadGit = require ('../index');
 
 const aiyouDG = new AiYouDownloadGit ();
 const loading = require ('./common/loading').init;
+
+const getCodeInteractionConfig = require ('./data/getCode');
+const cloneCodeInteractionConfig = require ('./data/cloneCode');
+const downloadCodeInteractionConfig = require ('./data/downloadCode');
 
 new class AiYouCLI {
   constructor () {
@@ -26,13 +31,13 @@ new class AiYouCLI {
     this.initCommand ();
     this.initEvents ();
     program.parse (process.argv);
+
     if (process.argv.length === 2) {
       setTimeout (() => {
         program.help (str => {
-          console.log (chalk.green (`${str}\r\n`));
-          return '';
+          return chalk.green (`${str}\r\n`);
         });
-      }, 16);
+      }, 160);
     }
   }
 
@@ -61,15 +66,19 @@ new class AiYouCLI {
     loading (() => {
       if (status === 'loading') {
         status = 'no';
-        aiyouDG.get ({
-          currentUrl,
-          targetPath,
-          option,
-          hooks: function (err) {
+        aiyouDG
+          .get ({
+            currentUrl,
+            targetPath,
+            option
+          })
+          .then (function () {
+            status = 'yes';
+          })
+          .catch (err => {
             err && console.log ('\r\n', err);
-            status = err ? 'bad' : 'yes';
-          }
-        });
+            status = 'bad';
+          });
       }
 
       switch (status) {
@@ -114,18 +123,48 @@ new class AiYouCLI {
       }); /* 回调函数 */
 
     program.on ('command:get', () => {
-      // console.log ('得到指定名称的仓库代码');
-      this.getCode ({
-        //   currentUrl: 'D:\\openSource\\home-public-warehouse-AiYouUI',
-        currentUrl: 'ilovejwl/aiyou-download-git',
-        targetPath: './aiyou-ui/web-front' + Date.now (),
-        option: {
-          git: 'git',
-          mode: 'clone',
-          branchName: 'master',
-          depthOne: false
-        }
-      });
+      setTimeout (() => {
+        this.startActionInteractionByGetCode ()
+          .then (answers => {
+            // console.log (answers);
+            const { authorName, warehouseName, downloadPath, isMaster } = answers;
+            const currentUrl = authorName + '/' + warehouseName;
+            const targetPath = downloadPath + Date.now ();
+            const branchName = isMaster ? 'master' : answers.branchName;
+
+            const config = {
+              //   currentUrl: 'D:\\openSource\\home-public-warehouse-AiYouUI',
+              currentUrl: currentUrl, // : 'ilovejwl/aiyou-download-git',
+              targetPath: targetPath, // : './aiyou-ui/web-front' + Date.now (),
+              option: {
+                git: 'git',
+                mode: 'clone',
+                branchName: branchName, // : 'master',
+                depthOne: false
+              }
+            };
+            // console.log(config)
+            // console.log ('得到指定名称的仓库代码');
+
+            // const config = {
+            //   //   currentUrl: 'D:\\openSource\\home-public-warehouse-AiYouUI',
+            //   currentUrl: 'ilovejwl/aiyou-download-git',
+            //   targetPath: './aiyou-ui/web-front' + Date.now (),
+            //   option: {
+            //     git: 'git',
+            //     // mode: 'clone',
+            //     mode: 'download',
+            //     branchName: 'master',
+            //     depthOne: false,
+            //   },
+            // };
+
+            this.getCode (config);
+          })
+          .catch (err => {
+            console.log (err);
+          });
+      }, 1000);
     });
   }
 
@@ -140,6 +179,43 @@ new class AiYouCLI {
       }); /* 回调函数 */
     program.on ('command:clone', () => {
       // console.log ('克隆指定名称的仓库代码');
+      setTimeout (() => {
+        this.startActionInteractionByCloneCode ()
+          .then (answers => {
+            // console.log (answers);
+            const {
+              authorName,
+              warehouseName,
+              downloadPath,
+              isLocalWarehouse,
+              localWarehouseAddress
+            } = answers;
+            let currentUrl;
+            if (isLocalWarehouse) {
+              currentUrl = localWarehouseAddress;
+            } else {
+              currentUrl = authorName + '/' + warehouseName;
+            }
+            const targetPath = downloadPath + Date.now ();
+            const branchName = null;
+
+            const config = {
+              //   currentUrl: 'D:\\openSource\\home-public-warehouse-AiYouUI',
+              currentUrl: currentUrl, // : 'ilovejwl/aiyou-download-git',
+              targetPath: targetPath, // : './aiyou-ui/web-front' + Date.now (),
+              option: {
+                git: 'git',
+                mode: 'clone',
+                branchName: branchName, // : 'master',
+                depthOne: false
+              }
+            };
+            this.getCode (config);
+          })
+          .catch (err => {
+            console.log (err);
+          });
+      }, 1000);
     });
   }
 
@@ -155,8 +231,50 @@ new class AiYouCLI {
 
     program.on ('command:download', () => {
       // console.log ('下载指定名称的仓库代码。');
+      setTimeout (() => {
+        this.startActionInteractionByDownloadCode ()
+          .then (answers => {
+            // console.log (answers);
+            const { authorName, warehouseName, downloadPath, isMaster } = answers;
+            const currentUrl = authorName + '/' + warehouseName;
+            const targetPath = downloadPath + Date.now ();
+            const branchName = isMaster ? 'master' : answers.branchName;
+
+            const config = {
+              //   currentUrl: 'D:\\openSource\\home-public-warehouse-AiYouUI',
+              currentUrl: currentUrl, // : 'ilovejwl/aiyou-download-git',
+              targetPath: targetPath, // : './aiyou-ui/web-front' + Date.now (),
+              option: {
+                git: 'git',
+                mode: 'download',
+                branchName: branchName, // : 'master',
+                depthOne: false
+              }
+            };
+
+            this.getCode (config);
+          })
+          .catch (err => {
+            console.log (err);
+          });
+      }, 1000);
     });
   }
 
   // #endregion 初始化命令 区域 Code Module End
+
+  // #region 命令处理区域 如交互 Code Module
+  startActionInteractionByGetCode () {
+    return inquirer.prompt (getCodeInteractionConfig);
+  }
+
+  startActionInteractionByDownloadCode () {
+    return inquirer.prompt (downloadCodeInteractionConfig);
+  }
+
+  startActionInteractionByCloneCode () {
+    return inquirer.prompt (cloneCodeInteractionConfig);
+  }
+
+  // #endregion 命令处理区域 如交互 Code Module End
 } ();

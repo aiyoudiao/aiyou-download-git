@@ -3,8 +3,8 @@
  * @version: 1.0.0
  * @Author: ilovejwl
  * @Date: 2020-02-02 08:08:34
- * @LastEditTime : 2020-02-04 07:39:53
- * @LastEditors  : ilovejwl
+ * @LastEditTime: 2020-02-27 13:20:58
+ * @LastEditors: ilovejwl
  */
 var figlet = require ('figlet');
 const chalk = require ('chalk');
@@ -33,6 +33,48 @@ function out (text) {
   );
 }
 
+function outError (text = 'bad') {
+  figlet (
+    text || 'aiyou-ui',
+    {
+      // font: 'Graffiti',
+      font: 'Jacky',
+      // font: 'Alpha',
+      horizontalLayout: 'full',
+      verticalLayout: 'full'
+    },
+    function (err, text) {
+      if (err) {
+        console.log (chalk.red (`output bad.\r\n`));
+        console.dir (err);
+        return;
+      }
+      console.log (chalk.red (`${text}\r\n`));
+    }
+  );
+}
+
+function outSuccess (text = 'success') {
+  figlet (
+    text || 'aiyou-ui',
+    {
+      font: 'Jacky',
+      horizontalLayout: 'full',
+      verticalLayout: 'full'
+    },
+    function (err, text) {
+      if (err) {
+        console.log (chalk.red (`\noutput bad.\r\n`));
+        console.dir (err);
+        return;
+      }
+      console.log (chalk.green (`${text}\r\n`));
+    }
+  );
+}
+
 module.exports = {
-  out: out
+  out,
+  outError,
+  outSuccess
 };

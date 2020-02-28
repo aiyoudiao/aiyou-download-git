@@ -3,8 +3,8 @@
  * @version: 1.0.0
  * @Author: ilovejwl
  * @Date: 2020-02-03 10:04:09
- * @LastEditTime : 2020-02-04 09:17:41
- * @LastEditors  : ilovejwl
+ * @LastEditTime: 2020-02-27 18:28:54
+ * @LastEditors: ilovejwl
  */
 const gitClone = require ('git-clone');
 const download = require ('download');
@@ -27,7 +27,7 @@ class AiYouDownloadGit {
    * @author ilovejwl
    * @public
    * @date 2020-02-03
-   * @param {obejct} {currentUrl, targetPath, option, hooks}
+   * @param {obejct} {currentUrl, targetPath, option}
    * @memberof AiYouDownloadGit
    */
   get ({ currentUrl, targetPath, option, hooks }) {
@@ -46,9 +46,9 @@ class AiYouDownloadGit {
     if (mode === 'clone') {
       const { checkoutBranchName } = warehouseAddress;
       option.checkoutBranchName = checkoutBranchName;
-      this.clone (currentUrl, targetPath, option, hooks);
+      return this.clone (currentUrl, targetPath, option);
     } else {
-      this.download (currentUrl, targetPath, option, hooks);
+      return this.download (currentUrl, targetPath, option);
     }
 
     function optionIsFunction () {
@@ -161,7 +161,13 @@ class AiYouDownloadGit {
       return undefined;
     }
 
-    const { type, origin: domain, owner, name, checkout } = warehouseAddress;
+    const {
+      type,
+      origin: domain,
+      owner,
+      name,
+      checkoutBranchName: checkout
+    } = warehouseAddress;
     let origin = this.initializationProtocol (domain, mode);
     const mark = origin.indexOf ('git@') === 0 ? ':' : '/';
     origin = origin + mark;
@@ -169,7 +175,7 @@ class AiYouDownloadGit {
     if (mode === 'clone') {
       return `${origin + owner}/${name}`;
     }
-
+    // debugger;
     switch (type) {
     case 'github':
     case 'git.imooc':
@@ -194,22 +200,32 @@ class AiYouDownloadGit {
    * @param {function} hooks
    * @memberof AiYouDownloadGit
    */
-  clone (url, targetPath, option, hooks) {
+  clone (url, targetPath, option) {
     const { git, depthOne, branchName, checkoutBranchName } = option;
+    const realCloneWarehouse = branchName === null;
+
     const config = {
       git: git,
-      checkout: branchName || checkoutBranchName,
+      checkout: branchName || checkoutBranchName || 'master',
       shallow: checkoutBranchName === 'master' && depthOne
     };
 
-    gitClone (url, targetPath, config, function (reason) {
-      if (reason) {
-        hooks (reason);
-        return;
+    return new Promise ((resolve, reject) => {
+      try {
+        gitClone (url, targetPath, config, function (reason) {
+          if (reason) {
+            // hooks (reason);
+            reject (reason);
+          }
+          if (!realCloneWarehouse) {
+            remove (`${targetPath}/.git`);
+          }
+          resolve ();
+          // hooks ();
+        });
+      } catch (error) {
+        reject (error);
       }
-
-      remove (`${targetPath}/.git`);
-      hooks ();
     });
   }
 
@@ -221,10 +237,9 @@ class AiYouDownloadGit {
    * @param {string} url
    * @param {string} targetPath
    * @param {obejct} option
-   * @param {function} hooks
    * @memberof AiYouDownloadGit
    */
-  download (url, targetPath, option, hooks) {
+  download (url, targetPath, option) {
     const { headers = {} } = option;
     delete option.headers;
 
@@ -244,7 +259,7 @@ class AiYouDownloadGit {
       }
     );
 
-    download (url, targetPath, config).then (hooks).catch (hooks);
+    return download (url, targetPath, config);
   }
 }
 
